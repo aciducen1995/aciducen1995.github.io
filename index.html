@@ -1,9 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Free Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Aciducen1995</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset some styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 800px;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 30px;
+      color: #e0e0e0;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #f0f0f0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      margin: 5px;
+      background: #fff;
+      color: #764ba2;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #764ba2;
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Optional: small floating circles animation */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-50px) translateX(30px); }
+      100% { transform: translateY(0) translateX(0); }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, Welcome to aciducen1995 Pages!</h1>
+  <!-- Floating circles for effect -->
+  <div class="circle" style="width:80px;height:80px;top:10%;left:20%;"></div>
+  <div class="circle" style="width:50px;height:50px;top:50%;left:80%;"></div>
+  <div class="circle" style="width:100px;height:100px;top:70%;left:40%;"></div>
+
+  <div class="container">
+    <h1>Welcome 👋</h1>
+    <h2>I'm Aciducen1995</h2>
+    <p>Real name: Abdul Rashid bin Mohamad Husain</p>
+    <a href="#about" class="btn">About Me</a>
+    <a href="#contact" class="btn">Contact</a>
+  </div>
 </body>
 </html>
