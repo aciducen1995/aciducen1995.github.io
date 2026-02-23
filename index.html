@@ -5,20 +5,195 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aciducen1995 | SysAdmin</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdul Rashid | Modern SysAdmin Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     /* Basic Reset */
     * { margin:0; padding:0; box-sizing:border-box; }
+    :root {
+      --bg: #070b14;
+      --panel: rgba(12, 20, 35, 0.72);
+      --panel-strong: rgba(20, 32, 55, 0.9);
+      --text: #e6edf3;
+      --muted: #a0adc0;
+      --primary: #6ee7ff;
+      --secondary: #7c9dff;
+      --accent: #4ade80;
+      --danger: #fb7185;
+      --ring: rgba(110, 231, 255, 0.35);
+      --border: rgba(150, 180, 220, 0.2);
+      --shadow: 0 24px 65px rgba(1, 8, 20, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: 'Roboto Mono', monospace;
       background-color: #0d1117;
       color: #c9d1d9;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 10% 10%, #10213f 0%, transparent 35%),
+                  radial-gradient(circle at 90% 15%, #1e1b4b 0%, transparent 35%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .noise,
+    .grid,
+    .orbs {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+
+    .grid {
+      background-image:
+        linear-gradient(rgba(106, 161, 245, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(106, 161, 245, 0.08) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(circle at center, black 25%, transparent 90%);
+      animation: drift 38s linear infinite;
+    }
+
+    .noise {
+      opacity: 0.08;
+      background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #ffffff 1px, transparent 2px);
+      background-size: 4px 4px;
+      mix-blend-mode: soft-light;
+    }
+
+    .orbs::before,
+    .orbs::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 999px;
+      filter: blur(65px);
+      opacity: 0.35;
+    }
+
+    .orbs::before {
+      top: -130px;
+      left: -100px;
+      background: #1d4ed8;
+      animation: orbFloat 18s ease-in-out infinite alternate;
+    }
+
+    .orbs::after {
+      right: -100px;
+      bottom: -160px;
+      background: #0ea5e9;
+      animation: orbFloat 20s ease-in-out infinite alternate-reverse;
+    }
+
+    .wrapper {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 24px 0 100px;
+      position: relative;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(7, 11, 20, 0.66);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 14px;
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .brand {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary);
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 8px rgba(74, 222, 128, 0.14);
+      animation: pulse 2s infinite;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      font-size: 0.92rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+      margin-top: 30px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 38px;
+      position: relative;
       overflow: hidden;
       text-align: center;
+      isolation: isolate;
+    }
+
+    .hero-main::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(110, 231, 255, 0.08), transparent 40%, rgba(124, 157, 255, 0.12));
+      z-index: -1;
     }
 
     /* Container */
@@ -26,24 +201,186 @@
       max-width: 800px;
       padding: 20px;
       animation: fadeIn 1s ease-in-out;
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .status span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.18);
     }
 
     h1 {
       font-size: 3rem;
       color: #58a6ff;
       margin-bottom: 0.5rem;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .highlight {
+      color: var(--primary);
+      text-shadow: 0 0 18px rgba(110, 231, 255, 0.25);
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 65ch;
+      margin-bottom: 24px;
+    }
+
+    .terminal {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(2, 6, 12, 0.86);
+      font-family: 'JetBrains Mono', monospace;
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    .term-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .term-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
     }
 
     h2 {
       font-size: 1.5rem;
       color: #39d353;
       margin-bottom: 20px;
+    .term-dot.red { background: #fb7185; }
+    .term-dot.yellow { background: #facc15; }
+    .term-dot.green { background: #4ade80; }
+
+    .term-body {
+      padding: 16px 14px;
+      min-height: 100px;
+      color: #c9f6ff;
+      font-size: 0.92rem;
     }
 
     p {
+    .type-line::after {
+      content: '_';
+      margin-left: 2px;
+      animation: blink 1s steps(2, jump-none) infinite;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .metric {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.55), rgba(15, 23, 42, 0.6));
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .metric h3 {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .metric strong {
+      font-size: 1.7rem;
+      color: var(--text);
+      display: block;
+      line-height: 1;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 30px;
+    }
+
+    .section h2 {
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      background: rgba(56, 189, 248, 0.12);
+      color: #c7edff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(125, 211, 252, 0.25);
+      font-size: 0.88rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .timeline-item h3 {
       font-size: 1rem;
       color: #8b949e;
       margin-bottom: 30px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
     }
 
     .btn {
@@ -52,16 +389,26 @@
       margin: 5px;
       border: 2px solid #58a6ff;
       color: #58a6ff;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 10px 16px;
+      color: var(--text);
       text-decoration: none;
       border-radius: 5px;
       font-weight: 700;
       transition: 0.3s ease;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn:hover {
       background-color: #58a6ff;
       color: #0d1117;
       transform: translateY(-3px);
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 5px var(--ring);
     }
 
     /* Terminal-style background grid animation */
@@ -85,16 +432,40 @@
       );
       animation: moveGrid 30s linear infinite;
       z-index: -1;
+    .btn.primary {
+      background: linear-gradient(90deg, #22d3ee, #6366f1);
+      color: #001118;
+      border: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @keyframes moveGrid {
       0% { transform: translate(0,0); }
       100% { transform: translate(-100px,-100px); }
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     /* Cursor animation */
@@ -106,16 +477,46 @@
       margin-left: 5px;
       animation: blink 1s infinite;
       vertical-align: bottom;
+    @keyframes drift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-46px, -46px, 0); }
     }
 
     @keyframes blink {
       0%, 50%, 100% { opacity: 1; }
       25%, 75% { opacity: 0; }
+      0%, 45% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    @keyframes orbFloat {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(30px, 45px, 0); }
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-side,
+      .section {
+        padding: 22px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="orbs"></div>
   <div class="grid"></div>
+  <div class="noise"></div>
 
   <div class="container">
     <h1>Aciducen1995 <span class="cursor"></span></h1>
@@ -123,6 +524,174 @@
     <p>Real name: Abdul Rashid bin Mohamad Husain</p>
     <a href="#about" class="btn">About Me</a>
     <a href="#contact" class="btn">Contact</a>
+  <div class="wrapper">
+    <header class="topbar">
+      <div class="brand">root@aciducen1995:~# online</div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <article class="card hero-main reveal">
+          <p class="status"><span></span>Available for SysAdmin & Infrastructure Roles</p>
+          <h1>Hi, I'm <span class="highlight">Abdul Rashid</span><br />
+            System Administrator & Reliability Engineer</h1>
+          <p class="lead">
+            I design secure, resilient, and automated infrastructure for modern teams. From Linux hardening to cloud migration and 24/7 uptime strategy, I turn operational chaos into stable systems.
+          </p>
+          <div class="terminal" aria-label="animated terminal">
+            <div class="term-head">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+              infra-status.sh
+            </div>
+            <div class="term-body">
+              <div class="type-line" id="terminalLine">$ initializing...</div>
+            </div>
+          </div>
+          <div class="cta-group">
+            <a class="btn primary" href="#contact">Let's Work Together</a>
+            <a class="btn" href="#experience">View Projects</a>
+          </div>
+        </article>
+
+        <aside class="card hero-side reveal" style="--delay: 120ms">
+          <div class="metric">
+            <h3>Years in IT Operations</h3>
+            <strong>8+</strong>
+          </div>
+          <div class="metric">
+            <h3>Infrastructure Uptime</h3>
+            <strong>99.95%</strong>
+          </div>
+          <div class="metric">
+            <h3>Automated Deployments</h3>
+            <strong>1200+</strong>
+          </div>
+          <div class="metric">
+            <h3>Incident MTTR Reduction</h3>
+            <strong>-42%</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section class="card section reveal" id="about">
+        <h2>About Me</h2>
+        <p>
+          I'm a systems professional focused on building high-availability environments, disaster recovery plans, and repeatable automation pipelines. I bring together strong Linux foundations, cloud-native tools, and sharp incident response practices to keep business-critical services healthy.
+        </p>
+      </section>
+
+      <section class="card section reveal" id="skills">
+        <h2>Core Skills</h2>
+        <div class="pill-list">
+          <span class="pill">Linux Administration (RHEL, Ubuntu, Debian)</span>
+          <span class="pill">Networking (VLAN, VPN, DNS, BGP Basics)</span>
+          <span class="pill">Containerization (Docker, Kubernetes)</span>
+          <span class="pill">Cloud Platforms (AWS, Azure)</span>
+          <span class="pill">IaC (Terraform, Ansible)</span>
+          <span class="pill">Monitoring (Zabbix, Prometheus, Grafana)</span>
+          <span class="pill">CI/CD (GitHub Actions, Jenkins)</span>
+          <span class="pill">Security Hardening & Compliance</span>
+          <span class="pill">Backup & Disaster Recovery</span>
+          <span class="pill">Scripting (Bash, Python)</span>
+        </div>
+      </section>
+
+      <section class="card section reveal" id="experience">
+        <h2>Selected Impact</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <h3>Infrastructure Modernization</h3>
+            <p>Migrated on-prem workloads to hybrid cloud with zero critical downtime and improved deployment speed by 60%.</p>
+          </article>
+          <article class="timeline-item">
+            <h3>Observability Rollout</h3>
+            <p>Implemented centralized logging and proactive alerting across 50+ servers, improving incident detection in minutes.</p>
+          </article>
+          <article class="timeline-item">
+            <h3>Security Baseline Project</h3>
+            <p>Introduced hardened system templates, patching routines, and MFA workflows to reduce vulnerabilities organization-wide.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="two-col" id="contact">
+        <article class="card section reveal contact">
+          <h2>Let's Connect</h2>
+          <p>If you're building reliable infrastructure and want an operations-minded engineer on your side, I'd love to help.</p>
+          <p>Email: <a href="mailto:abdulrashid@example.com">abdulrashid@example.com</a></p>
+          <p>LinkedIn: <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">linkedin.com/in/abdulrashid</a></p>
+          <p>GitHub: <a href="https://github.com/aciducen1995" target="_blank" rel="noreferrer">github.com/aciducen1995</a></p>
+        </article>
+
+        <article class="card section reveal" style="--delay: 140ms">
+          <h2>Current Focus</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3>Platform Reliability</h3>
+              <p>Designing health checks and self-healing workflows for mission critical apps.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>Automation Everywhere</h3>
+              <p>Eliminating repetitive maintenance through Infrastructure as Code and policy-driven operations.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>Continuous Learning</h3>
+              <p>Exploring advanced cloud security and service mesh operations for distributed systems.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Abdul Rashid bin Mohamad Husain — Built with systems thinking.
+    </footer>
   </div>
+
+  <script>
+    const terminalLines = [
+      '$ systemctl status production-stack --no-pager',
+      '● production-stack.service - Active (running)',
+      '$ ansible-playbook harden-linux.yml --limit all',
+      'PLAY RECAP => changed=14 failed=0 unreachable=0',
+      '$ terraform apply -auto-approve',
+      'Apply complete! Resources: 7 added, 2 changed, 0 destroyed.',
+      '$ uptime',
+      ' 17:42:11 up 148 days, 13:54, load average: 0.14, 0.11, 0.09'
+    ];
+
+    const lineEl = document.getElementById('terminalLine');
+    let lineIndex = 0;
+
+    function rotateTerminalLine() {
+      lineEl.textContent = terminalLines[lineIndex];
+      lineIndex = (lineIndex + 1) % terminalLines.length;
+    }
+
+    rotateTerminalLine();
+    setInterval(rotateTerminalLine, 2100);
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
