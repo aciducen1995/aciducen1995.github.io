@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Please Forgive Me</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
@@ -85,7 +83,7 @@
             font-size: 1.2rem;
             line-height: 1.6;
             margin-bottom: 20px;
-            min-height: 80px; /* Space for typing effect */
+            min-height: 80px; 
         }
 
         /* Image Gallery */
@@ -95,7 +93,7 @@
             gap: 15px;
             margin-bottom: 30px;
             flex-wrap: wrap;
-            opacity: 0; /* Hidden initially, fades in via JS */
+            opacity: 0; 
             transform: translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
         }
@@ -111,7 +109,6 @@
             cursor: pointer;
         }
 
-        /* Hover animation for images */
         .gallery img:nth-child(odd):hover {
             transform: scale(1.2) rotate(5deg);
             border-color: #ff6b81;
@@ -124,14 +121,14 @@
             z-index: 5;
         }
 
-        /* Buttons Area */
+        /* Buttons Area - FIXED FOR MOBILE */
         .btn-container {
             position: relative;
-            height: 60px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
+            min-height: 60px;
         }
 
         button {
@@ -141,8 +138,9 @@
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-family: 'Poppins', sans-serif;
+            z-index: 10;
         }
 
         #yes-btn {
@@ -159,7 +157,7 @@
         #no-btn {
             background: #dfe4ea;
             color: #2f3542;
-            position: absolute;
+            /* Will be changed to fixed position via JS when touched */
         }
 
         /* Hidden Success Message */
@@ -185,20 +183,38 @@
             color: rgba(255, 255, 255, 0.5);
             z-index: 10;
         }
+
+        /* MOBILE RESPONSIVE QUERIES */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 15px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            p {
+                font-size: 1rem;
+                min-height: 100px;
+            }
+            .gallery img {
+                width: 90px; /* Smaller images for phone */
+                height: 90px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Background Stars -->
     <div class="stars" id="stars"></div>
 
-    <!-- Main Card -->
     <div class="container" id="main-card">
         <h1>I'm So Sorry...</h1>
         <p id="typing-text"></p>
 
-        <!-- IMAGE GALLERY -->
-        <!-- Replace the links below with your own image file names! -->
         <div class="gallery" id="gallery">
             <img src="pic1.jpg" alt="Us 1">
             <img src="pic2.jpg" alt="Us 2">
@@ -207,8 +223,8 @@
         </div>
         
         <div class="btn-container" id="action-buttons">
-            <button id="no-btn">No 😔</button>
             <button id="yes-btn">I Forgive You ❤️</button>
+            <button id="no-btn">No 😔</button>
         </div>
 
         <div id="success-msg">Thank you! You are the best thing in my life. 🥰</div>
@@ -218,14 +234,13 @@
         &copy; 2026 Abdul Raffie
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
         // --- 1. Background Star Animation ---
         const starContainer = document.getElementById('stars');
-        for(let i = 0; i < 100; i++) {
+        for(let i = 0; i < 70; i++) {
             let star = document.createElement('div');
             star.className = 'star';
-            star.style.width = Math.random() * 4 + 'px';
+            star.style.width = Math.random() * 3 + 'px';
             star.style.height = star.style.width;
             star.style.left = Math.random() * 100 + 'vw';
             star.style.top = Math.random() * 100 + 'vh';
@@ -245,34 +260,40 @@
                 index++;
                 setTimeout(typeWriter, speed);
             } else {
-                // Fade in the gallery once typing finishes
                 const gallery = document.getElementById('gallery');
                 gallery.style.opacity = '1';
                 gallery.style.transform = 'translateY(0)';
             }
         }
         
-        // Start typing after a short delay
         setTimeout(typeWriter, 1000);
 
-        // --- 3. Interactive "Runaway" No Button ---
+        // --- 3. FIX: Interactive "Runaway" No Button for Mobile/PC ---
         const noBtn = document.getElementById('no-btn');
         const yesBtn = document.getElementById('yes-btn');
         
-        noBtn.style.left = '60%';
-        yesBtn.style.transform = 'translateX(-60%)';
-
-        noBtn.addEventListener('mouseover', () => {
-            const container = document.querySelector('.btn-container');
-            const containerRect = container.getBoundingClientRect();
+        function moveNoButton(e) {
+            e.preventDefault(); // Prevents tapping from registering as a click
             
-            const maxX = containerRect.width - noBtn.offsetWidth;
-            const maxY = 150; 
+            // Switch to fixed positioning to fly around the whole screen
+            noBtn.style.position = 'fixed';
+            noBtn.style.zIndex = '9999';
             
-            const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
-            const randomY = Math.floor(Math.random() * maxY) - (maxY / 2);
+            // Calculate a random position keeping it inside the screen bounds
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
 
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+            noBtn.style.transform = `none`; // Reset any previous transform
+        }
+
+        // Listen to BOTH mouse hover (PC) and touch start (Mobile)
+        ['mouseover', 'touchstart', 'click'].forEach(eventType => {
+            noBtn.addEventListener(eventType, moveNoButton, {passive: false});
         });
 
         // --- 4. Success Action (Confetti) ---
