@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Please Forgive Me</title>
+    <title>Sorry My Wife</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
@@ -121,7 +121,7 @@
             z-index: 5;
         }
 
-        /* Buttons Area - FIXED FOR MOBILE */
+        /* Buttons Area */
         .btn-container {
             position: relative;
             display: flex;
@@ -157,7 +157,6 @@
         #no-btn {
             background: #dfe4ea;
             color: #2f3542;
-            /* Will be changed to fixed position via JS when touched */
         }
 
         /* Hidden Success Message */
@@ -197,7 +196,7 @@
                 min-height: 100px;
             }
             .gallery img {
-                width: 90px; /* Smaller images for phone */
+                width: 90px;
                 height: 90px;
             }
             button {
@@ -223,15 +222,15 @@
         </div>
         
         <div class="btn-container" id="action-buttons">
-            <button id="yes-btn">I Forgive You ❤️</button>
-            <button id="no-btn">No 😔</button>
+            <button id="yes-btn">Kmk Maafkan Suami Kmk ❤️</button>
+            <button id="no-btn">Sik 😔</button>
         </div>
 
-        <div id="success-msg">Thank you! You are the best thing in my life. 🥰</div>
+        <div id="success-msg">Terima Kasih! Ktk adalah cinta hati kmk. 🥰</div>
     </div>
 
     <div class="footer">
-        &copy; 2026 Abdul Raffie
+        &copy; 2026 aciducen1995
     </div>
 
     <script>
@@ -250,7 +249,7 @@
         }
 
         // --- 2. Typing Effect ---
-        const text = "I know I messed up, and I can't stand seeing you upset. You mean the world to me. Can we put this behind us? Will you forgive me?";
+        const text = "Kmk tauk kmk banyak salah and i know I messed up. Kmk xpt ngga ktk manas2 cmtok. You mean the world to me. Please syg maafkan kmk";
         let index = 0;
         const speed = 40; 
         
@@ -268,36 +267,55 @@
         
         setTimeout(typeWriter, 1000);
 
-        // --- 3. FIX: Interactive "Runaway" No Button for Mobile/PC ---
+        // --- 3. Interactive "Runaway" No Button with Safe Margins ---
         const noBtn = document.getElementById('no-btn');
         const yesBtn = document.getElementById('yes-btn');
         
         function moveNoButton(e) {
-            e.preventDefault(); // Prevents tapping from registering as a click
+            e.preventDefault(); 
             
-            // Switch to fixed positioning to fly around the whole screen
             noBtn.style.position = 'fixed';
             noBtn.style.zIndex = '9999';
             
-            // Calculate a random position keeping it inside the screen bounds
-            const maxX = window.innerWidth - noBtn.offsetWidth;
-            const maxY = window.innerHeight - noBtn.offsetHeight;
+            // The Safe Margin prevents the button from touching the exact edge
+            const safeMargin = 40; 
             
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+            const maxX = window.innerWidth - noBtn.offsetWidth - safeMargin;
+            const maxY = window.innerHeight - noBtn.offsetHeight - safeMargin;
+            
+            // Math.max ensures the coordinate never drops below our 40px safe margin
+            const randomX = Math.max(safeMargin, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(safeMargin, Math.floor(Math.random() * maxY));
 
             noBtn.style.left = `${randomX}px`;
             noBtn.style.top = `${randomY}px`;
-            noBtn.style.transform = `none`; // Reset any previous transform
+            noBtn.style.transform = `none`; 
         }
 
-        // Listen to BOTH mouse hover (PC) and touch start (Mobile)
         ['mouseover', 'touchstart', 'click'].forEach(eventType => {
             noBtn.addEventListener(eventType, moveNoButton, {passive: false});
         });
 
-        // --- 4. Success Action (Confetti) ---
+        // --- 4. Success Action (Confetti + Webhook Logging) ---
         yesBtn.addEventListener('click', () => {
+            
+            // ----- WEBHOOK LOGGING -----
+            // Paste your Discord Webhook, Telegram Bot URL, or Formspree API link here
+            const webhookUrl = "https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX"; 
+            
+            if (webhookUrl !== "https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX") {
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    // The payload structure depends on the service you use. 
+                    // 'content' works natively for Discord webhooks.
+                    body: JSON.stringify({ 
+                        content: "🎉 Update: She clicked 'I Forgive You' at " + new Date().toLocaleString() 
+                    })
+                }).catch(err => console.log('Silent log sent.'));
+            }
+            // ---------------------------
+
             document.getElementById('action-buttons').style.display = 'none';
             document.getElementById('gallery').style.display = 'none';
             document.getElementById('typing-text').style.display = 'none';
