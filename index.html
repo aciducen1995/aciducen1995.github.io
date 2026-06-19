@@ -222,7 +222,7 @@
         </div>
         
         <div class="btn-container" id="action-buttons">
-            <button id="yes-btn">Kmk Maafkan Suami Kmk ❤️</button>
+            <button id="yes-btn">Kmk Mmaafkan Suami Kmk ❤️</button>
             <button id="no-btn">Sik 😔</button>
         </div>
 
@@ -301,19 +301,23 @@
             
             // ----- WEBHOOK LOGGING -----
             // Paste your Discord Webhook, Telegram Bot URL, or Formspree API link here
-            const webhookUrl = "https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX"; 
-            
-            if (webhookUrl !== "https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX") {
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    // The payload structure depends on the service you use. 
-                    // 'content' works natively for Discord webhooks.
-                    body: JSON.stringify({ 
-                        content: "🎉 Update: She clicked 'I Forgive You' at " + new Date().toLocaleString() 
-                    })
-                }).catch(err => console.log('Silent log sent.'));
-            }
+            // ----- WEBHOOK LOGGING -----
+// 1. Your original Discord Webhook URL
+const discordWebhook = "https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX";
+
+// 2. Wrap it in a free proxy to bypass the browser CORS block
+const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(discordWebhook);
+
+fetch(proxyUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+        content: "🎉 Update: She clicked 'I Forgive You' at " + new Date().toLocaleString() 
+    })
+})
+.then(response => console.log('Silent log sent to Discord.'))
+.catch(err => console.error('Webhook failed:', err));
+// ---------------------------
             // ---------------------------
 
             document.getElementById('action-buttons').style.display = 'none';
