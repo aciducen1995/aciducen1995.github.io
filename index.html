@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
-        /* CSS Variables & Reset */
+        /* CSS Reset & Structure */
         * {
             margin: 0;
             padding: 0;
@@ -159,7 +159,7 @@
             color: #2f3542;
         }
 
-        /* Hidden Success Message */
+        /* Success Message */
         #success-msg {
             display: none;
             margin-top: 20px;
@@ -222,12 +222,17 @@
         </div>
         
         <div class="btn-container" id="action-buttons">
-            <button id="yes-btn">Kmk Mmaafkan Suami Kmk ❤️</button>
+            <button id="yes-btn">Kmk Maafkan Suami Kmk ❤️</button>
             <button id="no-btn">Sik 😔</button>
         </div>
 
         <div id="success-msg">Terima Kasih! Ktk adalah cinta hati kmk. 🥰</div>
     </div>
+
+    <form id="discord-form" action="https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX" method="POST" target="hidden-iframe" style="display: none;">
+        <input type="hidden" name="content" id="discord-msg-content">
+    </form>
+    <iframe name="hidden-iframe" style="display: none;"></iframe>
 
     <div class="footer">
         &copy; 2026 aciducen1995
@@ -277,13 +282,12 @@
             noBtn.style.position = 'fixed';
             noBtn.style.zIndex = '9999';
             
-            // The Safe Margin prevents the button from touching the exact edge
+            // Margins keep it perfectly inside mobile screens
             const safeMargin = 40; 
             
             const maxX = window.innerWidth - noBtn.offsetWidth - safeMargin;
             const maxY = window.innerHeight - noBtn.offsetHeight - safeMargin;
             
-            // Math.max ensures the coordinate never drops below our 40px safe margin
             const randomX = Math.max(safeMargin, Math.floor(Math.random() * maxX));
             const randomY = Math.max(safeMargin, Math.floor(Math.random() * maxY));
 
@@ -296,36 +300,26 @@
             noBtn.addEventListener(eventType, moveNoButton, {passive: false});
         });
 
-        // --- 4. Success Action (Confetti + Webhook Logging) ---
+        // --- 4. Success Action (Confetti + Silent Native Submission) ---
         yesBtn.addEventListener('click', () => {
             
-            // ----- WEBHOOK LOGGING -----
-            // Paste your Discord Webhook, Telegram Bot URL, or Formspree API link here
-            // ----- WEBHOOK LOGGING -----
-// 1. Your original Discord Webhook URL
-const discordWebhook = "https://discord.com/api/webhooks/1372779315506450473/LAaZ-PmQn22zXqrvtGXI6DVZNon9Bf4Z3fdabpQlq4RpcjryM_jAtpGy4MNCmWo1wSnX";
+            // Fire the form payload to your Discord webhook via the hidden iframe
+            try {
+                const msgContent = document.getElementById('discord-msg-content');
+                msgContent.value = "🎉 Update: She clicked 'Kmk Mmaafkan Suami Kmk' at " + new Date().toLocaleString();
+                document.getElementById('discord-form').submit();
+            } catch(err) {
+                console.log('Silent form fallback execution.');
+            }
 
-// 2. Wrap it in a free proxy to bypass the browser CORS block
-const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(discordWebhook);
-
-fetch(proxyUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ 
-        content: "🎉 Update: She clicked 'I Forgive You' at " + new Date().toLocaleString() 
-    })
-})
-.then(response => console.log('Silent log sent to Discord.'))
-.catch(err => console.error('Webhook failed:', err));
-// ---------------------------
-            // ---------------------------
-
+            // Interface Updates
             document.getElementById('action-buttons').style.display = 'none';
             document.getElementById('gallery').style.display = 'none';
             document.getElementById('typing-text').style.display = 'none';
             
             document.getElementById('success-msg').style.display = 'block';
 
+            // Confetti Engine
             var duration = 4 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
