@@ -1,0 +1,23 @@
+.reveal {
+  display: block;
+}
+
+/* The mask is what makes the rise read as an uncovering rather than a
+   slide. `clip` (not `hidden`) keeps descenders from being scrollable. */
+.reveal__mask {
+  display: inline-block;
+  overflow: clip;
+  /* Descenders and Fraunces' generous overshoot need headroom. */
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+  vertical-align: bottom;
+}
+
+.reveal__inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+.draw-rule {
+  transform-origin: left center;
+}

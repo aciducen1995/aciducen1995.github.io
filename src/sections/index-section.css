@@ -1,0 +1,86 @@
+.index-sec__body {
+  row-gap: var(--space-2xl);
+  align-items: start;
+}
+
+.index-sec__prose {
+  grid-column: 1 / span 5;
+  display: grid;
+  gap: 1.1em;
+  will-change: transform;
+}
+
+.index-sec__sig {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: var(--space-m);
+}
+
+.index-sec__sig-name {
+  font-size: var(--step-4);
+  font-variation-settings: 'SOFT' 60, 'WONK' 1, 'opsz' 40;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1;
+}
+
+/* --- Principles ------------------------------------------------------ */
+.index-sec__principles {
+  grid-column: 7 / span 6;
+  display: grid;
+}
+
+.principle {
+  border-top: 1px solid var(--rule);
+}
+
+.principle:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.principle__inner {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: var(--space-s);
+  padding-block: var(--space-m);
+  transition: padding-left var(--dur) var(--ease-out);
+}
+
+.principle:hover .principle__inner {
+  padding-left: 0.6rem;
+}
+
+.principle__n {
+  color: var(--accent);
+  padding-top: 0.3em;
+}
+
+.principle__title {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 20, 'WONK' 1, 'opsz' 30;
+  font-weight: 400;
+  font-size: var(--step-2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.principle__body {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  max-width: 46ch;
+}
+
+@media (max-width: 60rem) {
+  .index-sec__prose,
+  .index-sec__principles {
+    grid-column: 1 / -1;
+  }
+  .index-sec__prose {
+    /* Parallax on a narrow column reads as a rendering bug. */
+    transform: none !important;
+  }
+  .principle__inner {
+    grid-template-columns: 2.5rem 1fr;
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+
+    <title>Rashid — Engineer & Interface Designer</title>
+    <meta
+      name="description"
+      content="Portfolio of Rashid. Systems, interfaces, and the seams between them."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Rashid — Engineer & Interface Designer" />
+    <meta
+      property="og:description"
+      content="Systems, interfaces, and the seams between them."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter+Tight:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@300..600&display=swap"
+    />
+
+    <script>
+      // Resolve theme before first paint so there is never a flash.
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var system = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.dataset.theme = stored || system;
+        } catch (e) {
+          /* private mode — fall through to the markup default */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="root"></div>
+    <noscript>
+      <div class="noscript">
+        This portfolio uses JavaScript for its motion and layout. The written content is
+        available at <a href="mailto:rash@gmail.com">rash@gmail.com</a>.
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,255 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  will-change: transform;
+}
+
+.nav__inner {
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+}
+
+/* The bar itself stays transparent; only its rule and a soft veil fade
+   in once you have left the hero. */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease-out);
+  pointer-events: none;
+}
+
+.nav.is-scrolled::before {
+  opacity: 1;
+}
+
+.nav__rule {
+  height: 1px;
+  background: var(--rule);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 700ms var(--ease-out);
+}
+
+.nav.is-scrolled .nav__rule {
+  transform: scaleX(1);
+}
+
+.nav__inner > * {
+  position: relative;
+}
+
+/* --- Brand -------------------------------------------------------- */
+.nav__monogram {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 0, 'WONK' 1, 'opsz' 20;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  display: block;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__brand:hover .nav__monogram {
+  color: var(--accent);
+}
+
+/* --- Links -------------------------------------------------------- */
+.nav__links {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.9rem, 2.4vw, 2.1rem);
+}
+
+.nav__link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.3rem 0;
+  color: var(--ink-muted);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__link-index {
+  font-size: 0.58rem;
+  color: var(--ink-faint);
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__link-text {
+  font-size: var(--step--1);
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+/* Underline grows from the left, retracts to the right. */
+.nav__link-text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 420ms var(--ease-out);
+}
+
+.nav__link:hover,
+.nav__link:focus-visible,
+.nav__link.is-active {
+  color: var(--ink);
+}
+
+.nav__link.is-active .nav__link-index {
+  color: var(--accent);
+}
+
+.nav__link:hover .nav__link-text::after,
+.nav__link:focus-visible .nav__link-text::after,
+.nav__link.is-active .nav__link-text::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* --- Meta --------------------------------------------------------- */
+.nav__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.nav__clock {
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+.nav__theme {
+  width: 40px;
+  height: 22px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  display: grid;
+  align-items: center;
+  padding: 0 3px;
+  transform: translate(var(--mx, 0), var(--my, 0));
+}
+
+.nav__theme-dial {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition:
+    transform 480ms var(--ease-spring),
+    background-color var(--dur) var(--ease-out);
+}
+
+.nav__theme-dial[data-theme-state='light'] {
+  transform: translateX(16px);
+  background: var(--accent);
+}
+
+/* --- Burger -------------------------------------------------------- */
+.nav__burger {
+  display: none;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  gap: 6px;
+  grid-auto-flow: row;
+}
+
+.nav__burger-bar {
+  width: 20px;
+  height: 1px;
+  background: var(--ink);
+  transition: transform 420ms var(--ease-out);
+}
+
+.nav__burger.is-open .nav__burger-bar:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.nav__burger.is-open .nav__burger-bar:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* --- Mobile menu ---------------------------------------------------- */
+.menu {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+  z-index: -1; /* sits under the bar, above the page */
+  display: grid;
+}
+
+.menu__inner {
+  padding-top: calc(var(--nav-h) + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+
+.menu__list {
+  display: grid;
+  gap: 0.15em;
+}
+
+.menu__item {
+  overflow: clip;
+  padding-block: 0.06em;
+}
+
+.menu__link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  width: 100%;
+  text-align: left;
+  font-size: clamp(2.6rem, 13vw, 4.6rem);
+  line-height: 1;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.menu__link:active {
+  color: var(--accent);
+}
+
+.menu__index {
+  font-size: 0.6rem;
+  color: var(--accent);
+}
+
+.menu__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--rule);
+}
+
+/* --- Small screens ------------------------------------------------- */
+@media (max-width: 52rem) {
+  .nav__links {
+    display: none;
+  }
+  .nav__clock {
+    display: none;
+  }
+  .nav__burger {
+    display: grid;
+  }
+}

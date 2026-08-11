@@ -1,0 +1,50 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  display: grid;
+  align-items: end;
+  /* Exit animates this to inset(0 0 100% 0) — the panel lifts like a blind. */
+  clip-path: inset(0% 0% 0% 0%);
+  will-change: clip-path;
+}
+
+.preloader__inner {
+  padding-bottom: clamp(2rem, 7vh, 4.5rem);
+  display: grid;
+  gap: var(--space-m);
+}
+
+/* The mask does the clipping; the word inside does the moving. */
+.preloader__mask {
+  display: block;
+  overflow: clip;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+.preloader__word {
+  display: block;
+  font-size: var(--display-sm);
+  will-change: transform;
+}
+
+.preloader__meter {
+  height: 1px;
+  background: var(--rule);
+  position: relative;
+  overflow: clip;
+}
+
+.preloader__meter-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+.preloader__count {
+  justify-self: end;
+  color: var(--ink-muted);
+}

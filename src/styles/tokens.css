@@ -1,0 +1,101 @@
+/* ------------------------------------------------------------------
+   Design tokens
+   The whole visual language lives here. Two themes, one accent, one
+   grid. Nothing downstream should hard-code a colour or a size.
+   ------------------------------------------------------------------ */
+
+:root {
+  /* --- Typefaces ------------------------------------------------- */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-ui: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Fraunces variable axes. WONK on, SOFT low: sharp but not cold. */
+  --display-settings: 'SOFT' 12, 'WONK' 1, 'opsz' 120;
+
+  /* --- Fluid type scale ------------------------------------------
+     Ratios are hand-tuned rather than generated; the display sizes
+     intentionally break the scale so headlines feel like objects. */
+  --step--2: clamp(0.66rem, 0.63rem + 0.13vw, 0.72rem);
+  --step--1: clamp(0.79rem, 0.75rem + 0.19vw, 0.89rem);
+  --step-0: clamp(0.95rem, 0.9rem + 0.26vw, 1.1rem);
+  --step-1: clamp(1.14rem, 1.05rem + 0.42vw, 1.4rem);
+  --step-2: clamp(1.37rem, 1.22rem + 0.68vw, 1.79rem);
+  --step-3: clamp(1.64rem, 1.4rem + 1.06vw, 2.28rem);
+  --step-4: clamp(1.97rem, 1.61rem + 1.6vw, 2.9rem);
+  --step-5: clamp(2.37rem, 1.83rem + 2.36vw, 3.7rem);
+  --display-sm: clamp(3rem, 1.6rem + 6.2vw, 6.5rem);
+  --display-md: clamp(3.8rem, 1.3rem + 11vw, 10rem);
+  --display-lg: clamp(4.4rem, 0.4rem + 17.5vw, 15.5rem);
+
+  /* --- Spacing ---------------------------------------------------- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2.25rem;
+  --space-xl: 3.5rem;
+  --space-2xl: 5.5rem;
+  --space-3xl: 8rem;
+  --section-gap: clamp(6rem, 12vh, 11rem);
+
+  /* --- Layout ------------------------------------------------------ */
+  --gutter: clamp(1.15rem, 4vw, 3.25rem);
+  --measure: 62ch;
+  --columns: 12;
+  --nav-h: 4.5rem;
+
+  /* --- Motion ------------------------------------------------------
+     Two easings do almost all the work. `--ease-out` for things
+     arriving, `--ease-io` for things that move under their own power. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 180ms;
+  --dur: 420ms;
+  --dur-slow: 900ms;
+
+  /* --- Elevation / radii -------------------------------------------- */
+  --radius-s: 2px;
+  --radius-m: 4px;
+  --radius-pill: 999px;
+  --hairline: 1px;
+}
+
+/* --- Dark (default) ------------------------------------------------- */
+:root,
+[data-theme='dark'] {
+  --paper: #0c0c0d;
+  --paper-raised: #141416;
+  --paper-sunken: #070708;
+  --ink: #eeeae2;
+  --ink-muted: #8b867b;
+  --ink-faint: #4d4a45;
+  --rule: rgb(238 234 226 / 0.13);
+  --rule-strong: rgb(238 234 226 / 0.28);
+  --accent: #ff5a38;
+  --accent-ink: #0c0c0d;
+  --selection: rgb(255 90 56 / 0.28);
+  --scrim: rgb(12 12 13 / 0.72);
+  --noise-opacity: 0.035;
+  --plate-blend: screen;
+}
+
+/* --- Light ---------------------------------------------------------- */
+[data-theme='light'] {
+  --paper: #efece4;
+  --paper-raised: #f7f5f0;
+  --paper-sunken: #e3dfd4;
+  --ink: #14120f;
+  --ink-muted: #5f594e;
+  --ink-faint: #a49d90;
+  --rule: rgb(20 18 15 / 0.15);
+  --rule-strong: rgb(20 18 15 / 0.34);
+  --accent: #d84021;
+  --accent-ink: #f7f5f0;
+  --selection: rgb(216 64 33 / 0.2);
+  --scrim: rgb(239 236 228 / 0.72);
+  --noise-opacity: 0.05;
+  --plate-blend: multiply;
+}

@@ -1,0 +1,69 @@
+.marquee {
+  overflow: clip;
+  border-block: 1px solid var(--rule);
+  padding-block: clamp(0.9rem, 2vh, 1.4rem);
+  user-select: none;
+  /* Feather both ends so words don't get guillotined at the edges. */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee__run {
+  display: flex;
+  align-items: center;
+}
+
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding-right: clamp(1.25rem, 3vw, 2.5rem);
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 30, 'WONK' 1, 'opsz' 48;
+  font-size: clamp(1.5rem, 3.6vw, 2.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.marquee__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No motion, so the duplicate copy is pure noise — hide the overflow
+     and let the first run sit still. */
+  .marquee__track {
+    width: 100%;
+  }
+  .marquee__run:last-child {
+    display: none;
+  }
+  .marquee__run {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,33 @@
+.plate {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.plate__ground {
+  fill: var(--paper-sunken);
+}
+
+.plate__rules line {
+  stroke: var(--ink);
+  stroke-width: 0.6;
+  opacity: 0.14;
+}
+
+.plate__dots circle {
+  fill: var(--ink);
+  opacity: 0.3;
+}
+
+.plate__figures path {
+  fill: none;
+  stroke: var(--ink);
+  opacity: 0.55;
+  stroke-linecap: square;
+  vector-effect: non-scaling-stroke;
+}
+
+.plate__accent circle,
+.plate__accent rect {
+  fill: var(--accent);
+}

@@ -1,0 +1,80 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  display: grid;
+  place-items: center;
+  will-change: transform;
+  transition:
+    width 380ms var(--ease-out),
+    height 380ms var(--ease-out),
+    opacity 260ms linear,
+    background-color 280ms var(--ease-out),
+    border-color 280ms var(--ease-out),
+    mix-blend-mode 0s;
+}
+
+.cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor.is-down {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- States --------------------------------------------------------- */
+
+.cursor--link {
+  width: 52px;
+  height: 52px;
+  background: var(--accent);
+  border-color: transparent;
+}
+
+.cursor--view {
+  width: 92px;
+  height: 92px;
+  background: var(--accent);
+  border-color: transparent;
+}
+
+.cursor--drag {
+  width: 64px;
+  height: 64px;
+  border-color: var(--accent);
+  border-style: dashed;
+}
+
+.cursor__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 240ms var(--ease-out);
+  white-space: nowrap;
+}
+
+.cursor--view .cursor__label,
+.cursor--link .cursor__label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

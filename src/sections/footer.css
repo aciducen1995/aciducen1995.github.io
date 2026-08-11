@@ -1,0 +1,95 @@
+.footer {
+  padding-top: clamp(3rem, 9vh, 6rem);
+  padding-bottom: var(--space-m);
+  border-top: 1px solid var(--rule);
+  overflow: clip;
+}
+
+.footer__top {
+  row-gap: var(--space-l);
+  padding-bottom: clamp(2.5rem, 8vh, 5rem);
+}
+
+.footer__col {
+  grid-column: span 4;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.footer__col--end {
+  justify-items: end;
+  text-align: right;
+}
+
+.footer__text {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 40ch;
+}
+
+.footer__keys {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+.footer__keys kbd {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-s);
+  padding: 0.05em 0.4em;
+  margin-right: 0.4rem;
+}
+
+.footer__time {
+  font-family: var(--font-mono);
+  font-size: var(--step-1);
+}
+
+/* --- The big mark --------------------------------------------------- */
+.footer__mark {
+  display: block;
+  width: 100%;
+  padding: 0;
+  line-height: 0.78;
+}
+
+.footer__mark-text {
+  display: block;
+  /* Sized to fill the measure exactly — the name becomes the rule that
+     closes the page. */
+  font-size: clamp(2.6rem, 13.2vw, 12rem);
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  color: var(--ink);
+  transition: color 620ms var(--ease-out);
+}
+
+.footer__mark:hover .footer__mark-text {
+  color: var(--accent);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+  padding-top: var(--space-s);
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 60rem) {
+  .footer__col {
+    grid-column: 1 / -1;
+  }
+  .footer__col--end {
+    justify-items: start;
+    text-align: left;
+  }
+}

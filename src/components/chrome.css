@@ -1,0 +1,190 @@
+/* --- Grain ---------------------------------------------------------- */
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 150;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  /* Slow drift keeps it from looking like a static texture overlay. */
+  animation: grain-drift 8s steps(6) infinite;
+}
+
+.grain__svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes grain-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-2%, 1.5%);
+  }
+  40% {
+    transform: translate(1.5%, -1%);
+  }
+  60% {
+    transform: translate(-1%, -2%);
+  }
+  80% {
+    transform: translate(2%, 1%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    animation: none;
+  }
+}
+
+/* --- Grid overlay ---------------------------------------------------- */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  pointer-events: none;
+}
+
+.grid-overlay__inner {
+  height: 100%;
+}
+
+.grid-overlay__col {
+  background: color-mix(in oklab, var(--accent) 9%, transparent);
+  border-inline: 1px solid color-mix(in oklab, var(--accent) 22%, transparent);
+}
+
+/* --- Scroll rail ------------------------------------------------------ */
+.rail {
+  position: fixed;
+  top: 50%;
+  right: clamp(0.75rem, 2vw, 1.6rem);
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.rail__track {
+  position: relative;
+  width: 1px;
+  height: 28vh;
+  min-height: 140px;
+  background: var(--rule);
+}
+
+.rail__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top center;
+}
+
+.rail__list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.rail__tick {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.15rem 0;
+}
+
+.rail__tick-mark {
+  width: 14px;
+  height: 1px;
+  background: var(--rule-strong);
+  transition:
+    width var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+
+.rail__tick-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity var(--dur) var(--ease-out),
+    transform var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+.rail__tick:hover .rail__tick-label,
+.rail__tick:focus-visible .rail__tick-label,
+.rail__tick.is-active .rail__tick-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.rail__tick.is-active .rail__tick-label {
+  color: var(--ink);
+}
+
+.rail__tick:hover .rail__tick-mark,
+.rail__tick.is-active .rail__tick-mark {
+  width: 26px;
+  background: var(--accent);
+}
+
+@media (max-width: 60rem) {
+  .rail {
+    display: none;
+  }
+}
+
+/* --- Shortcut hint ----------------------------------------------------- */
+.hint {
+  position: fixed;
+  left: var(--gutter);
+  bottom: var(--space-m);
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.7rem 0.55rem 0.9rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+}
+
+.hint__text {
+  color: var(--ink-muted);
+}
+
+.hint kbd {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-s);
+  padding: 0.05em 0.35em;
+  letter-spacing: 0;
+}
+
+.hint__close {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--ink-muted);
+  padding: 0.1rem 0.3rem;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.hint__close:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 40rem) {
+  .hint {
+    display: none;
+  }
+}
