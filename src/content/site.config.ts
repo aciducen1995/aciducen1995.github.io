@@ -51,13 +51,13 @@ export const site = {
   monogram: 'R',
   role: 'Engineer & Interface Designer',
   /** Used by the hero. Kept to three words per line on purpose. */
-  headline: ['Systems', 'and their', 'surfaces'],
-  location: 'Port-au-Prince, HT',
-  timezone: 'America/Port-au-Prince',
-  email: 'rash@gmail.com',
+  headline: ['Have you tried', 'turning it', 'off and on?'],
+  location: 'Kuching, Sarawak',
+  timezone: 'Asia/Kuching',
+  email: 'aciducen1995@gmail.com',
   availability: {
     open: true,
-    note: 'Taking on selected work from Q4',
+    note: 'In love with Data Center',
   },
 
   /* --- Voice ------------------------------------------------------- */
