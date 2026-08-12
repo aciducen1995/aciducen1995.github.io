@@ -8,6 +8,7 @@ import { IndexSection } from '@/sections/Index'
 import { Work } from '@/sections/Work'
 import { Capabilities } from '@/sections/Capabilities'
 import { Trajectory } from '@/sections/Trajectory'
+import { Certificates } from '@/sections/Certificates'
 import { Contact } from '@/sections/Contact'
 import { Footer } from '@/sections/Footer'
 import { useActiveSection } from '@/lib/hooks'
@@ -18,6 +19,7 @@ const SECTIONS = [
   { id: 'work', label: 'Work' },
   { id: 'capabilities', label: 'Capabilities' },
   { id: 'trajectory', label: 'Trajectory' },
+  { id: 'certificates', label: 'Certificates' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -46,6 +48,7 @@ export default function App() {
         <Work />
         <Capabilities />
         <Trajectory />
+        <Certificates />
         <Contact />
       </main>
 

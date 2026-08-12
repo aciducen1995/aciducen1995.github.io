@@ -17,7 +17,7 @@ export function Contact() {
     <section className="section contact" id="contact" aria-labelledby="contact-title">
       <div className="shell">
         <p className="label contact__eyebrow">
-          <span className="accent">05</span>
+          <span className="accent">06</span>
           <span aria-hidden="true">—</span>
           Contact
         </p>

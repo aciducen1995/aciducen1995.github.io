@@ -16,8 +16,11 @@ import './field.css'
    ------------------------------------------------------------------ */
 
 const SPACING = 34
-const MAX_DPR = 2
+// This is an ambient layer, not a high-detail illustration. Capping at 1.5
+// avoids rendering four times as many pixels on high-density displays.
+const MAX_DPR = 1.5
 const INFLUENCE = 170
+const FRAME_INTERVAL = 1000 / 30
 
 export function FieldCanvas({ className = '' }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -35,6 +38,7 @@ export function FieldCanvas({ className = '' }: { className?: string }) {
     let raf = 0
     let running = true
     let t = 0
+    let lastDraw = -FRAME_INTERVAL
 
     // Pointer in CSS pixels, parked far away so nothing is lit at rest.
     const pointer = { x: -9999, y: -9999, active: false }
@@ -108,8 +112,14 @@ export function FieldCanvas({ className = '' }: { className?: string }) {
     }
 
     const loop = (now: number) => {
-      t = now
-      draw()
+      // Redrawing the entire field at display refresh rate competed with
+      // Lenis while the hero was visible. Thirty frames is smooth for this
+      // deliberately slow background, and leaves the scroll frame free.
+      if (now - lastDraw >= FRAME_INTERVAL) {
+        t = now
+        draw()
+        lastDraw = now
+      }
       if (running) raf = requestAnimationFrame(loop)
     }
 

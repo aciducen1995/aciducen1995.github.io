@@ -44,12 +44,20 @@ export type TimelineEntry = {
   note: string
 }
 
+export type Certificate = {
+  name: string
+  issuer: string
+  year: string
+  /** Optional public verification or credential URL. */
+  href?: string
+}
+
 export const site = {
   /* --- Identity ---------------------------------------------------- */
-  name: 'Rashid',
-  shortName: 'Rashid',
+  name: 'Abdul Rashid AKA aciducen1995',
+  shortName: 'Rashid AKA aciducen1995',
   monogram: 'R',
-  role: 'Engineer & Interface Designer',
+  role: 'Senior Systems Engineer',
   /** Used by the hero. Kept to three words per line on purpose. */
   headline: ['Have you tried', 'turning it', 'off and on?'],
   location: 'Kuching, Sarawak',
@@ -62,32 +70,32 @@ export const site = {
 
   /* --- Voice ------------------------------------------------------- */
   intro: [
-    'I build the parts of software people actually touch — and the parts underneath that decide whether touching it feels good.',
-    'Most of my work sits at the seam between an interface and the system behind it: the loading state that hides a slow query, the animation that explains a state change, the API shape that makes a screen possible or impossible.',
-    'I care about latency, legibility, and leaving a codebase easier to change than I found it.',
+    'I build and maintain the systems behind the systems people rely on — from monitoring and automation to the infrastructure that keeps services running.',
+    'Most of my work sits at the intersection of infrastructure, observability, and automation: turning repetitive tasks into scripts, turning system behaviour into useful metrics, and turning incidents into problems that can be detected before they become outages.',
+    'I care about reliability, visibility, and leaving every system easier to operate and troubleshoot than I found it.',
   ],
 
   /** Short, declarative, first-person. No mission statements. */
   principles: [
     {
       n: '01',
-      title: 'Motion is explanation',
-      text: 'An animation earns its place by telling you where something came from or where it went. If it only decorates, it gets cut.',
+      title: 'If it can be monitored, monitor it',
+      text: 'I want systems to tell me when something is wrong before someone has to report it. Good monitoring turns invisible problems into actionable signals.',
     },
     {
       n: '02',
-      title: 'Fast is a feature',
-      text: 'Perceived speed is designed, not discovered. Optimistic writes, skeletons that match the real layout, work moved off the critical path.',
+      title: 'Automate the repetitive',
+      text: 'If I have to do the same task twice, I start thinking about how to automate it. Scripts, APIs, Ansible, and scheduled jobs should remove unnecessary manual work.',
     },
     {
       n: '03',
-      title: 'Constraints before options',
-      text: 'A tight palette, a fixed grid, and three type sizes produce better work than infinite choice. Same goes for architecture.',
+      title: 'Visibility before assumptions',
+      text: 'Logs, metrics, dashboards, and actual system behaviour come before guessing. I prefer finding the signal in the data over assuming what the system is doing.',
     },
     {
       n: '04',
-      title: 'Legible over clever',
-      text: 'The next person to read the code is the user too. Clever costs interest; obvious compounds.',
+      title: 'Make failure easier to understand',
+      text: 'Systems will fail. The goal is to make those failures visible, diagnosable, and recoverable — with enough context to fix the problem instead of just restarting it.',
     },
   ],
 
@@ -229,6 +237,9 @@ export const site = {
       note: 'Built things badly, then built them again. Still the most useful two years.',
     },
   ] satisfies TimelineEntry[],
+
+  /* --- Certificates ------------------------------------------------ */
+  certificates: [] as Certificate[],
 
   /* --- Marquee band ------------------------------------------------- */
   marquee: [

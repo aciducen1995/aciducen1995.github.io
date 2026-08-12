@@ -117,7 +117,7 @@ want to change the vocabulary of shapes itself.
 Note that `title` and `year` remain the visible identity of a project — the plate is texture, not
 a screenshot. If you want real screenshots, that is a component change, not a content change.
 
-### Disciplines, timeline, links
+### Disciplines, timeline, certificates, links
 
 **`disciplines`** — four entries of `{ title, blurb, tools }`. Four fills the 12-column grid as
 three-column cards. Three or six also work; five will leave a gap. The `blurb` should say what
@@ -126,6 +126,9 @@ you do with the skill, not that you have it.
 **`timeline`** — `{ period, org, role, note }`, newest first. `period` is free text (`'2025 —'`,
 `'2022 — 2025'`) so open-ended entries read naturally. Four to six entries; this is a
 trajectory, not a full CV.
+
+**`certificates`** — `{ name, issuer, year, href? }`, newest first. `href` is optional; add a
+public credential-verification link when you have one. Add entries directly in `site.config.ts`.
 
 **`links`** — `{ label, href, handle }`. The handle is the small grey text on the right. The
 grid is `auto-fit`, so any number works, but four makes an even row on desktop.
